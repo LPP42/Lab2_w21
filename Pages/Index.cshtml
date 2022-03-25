@@ -1,0 +1,13 @@
+﻿@page
+@model IndexModel
+@inject GameStoreContext dbContext
+@{
+	ViewData["Title"] = "Home page";
+
+	var gl = dbContext.Game.ToList();
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

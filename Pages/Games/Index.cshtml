@@ -1,0 +1,76 @@
+@page
+@model razor_ef_2022.Pages.Games.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+	<a asp-page="Create">Create New</a>
+</p>
+<p>
+<form>
+	<p>
+		Search Titles:
+		<input type="text" asp-for="Query" />
+	<div>
+	<input type="date" asp-for="Query_date" value=""/>
+	Before
+	<input type="radio" asp-for="beforeAfter" value="before" checked="true" />
+	After
+	<input type="radio" asp-for="beforeAfter" value="after" />
+	</div>
+	<br>
+	Enable filter
+	<input type="checkbox" asp-for="filterOn" checked="true" />
+	<input type="submit" value="Filter" />
+
+	</p>
+</form>
+
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].Price)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].DatePublished)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Games[0].Genre)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Games)
+		{
+			<tr>
+				<td>
+					@Html.Raw($"<em>{item.Title}</em>")
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DatePublished)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Genre)
+				</td>
+				<td>
+					@* /Edit/?id=3 *@
+					<a asp-page="./Edit" asp-route-id="@item.GameId">Edit</a> |
+					<a asp-page="./Details" asp-route-id="@item.GameId">Details</a> |
+					<a asp-page="./Delete" asp-route-id="@item.GameId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
